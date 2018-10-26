@@ -9,6 +9,7 @@ public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
+        //10.129.233.75
     }
 
     @Override
