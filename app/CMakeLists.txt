@@ -35,57 +35,71 @@ find_library( # Sets the name of the path variable.
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
-include_directories(libs/include)
-set(distribution_DIR libs)
-add_library( avcodec
-        SHARED
-        IMPORTED)
-set_target_properties( avcodec
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libavcodec.so)
-
-add_library( avfilter
-        SHARED
-        IMPORTED)
-set_target_properties( avfilter
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libavfilter.so)
-
-add_library( avformat
-        SHARED
-        IMPORTED)
-set_target_properties( avformat
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libavformat.so)
-
+set(distribution_DIR ${CMAKE_SOURCE_DIR}/src/main/jni/armeabi)
 add_library( avutil
-        SHARED
-        IMPORTED)
+             SHARED
+             IMPORTED )
 set_target_properties( avutil
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libavutil.so)
-
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libavutil.so)
 add_library( swresample
-        SHARED
-        IMPORTED)
+             SHARED
+             IMPORTED )
 set_target_properties( swresample
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libswresample.so)
-
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libswresample.so)
+add_library( avcodec
+             SHARED
+             IMPORTED )
+set_target_properties( avcodec
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libavcodec.so)
+add_library( avfilter
+             SHARED
+             IMPORTED )
+set_target_properties( avfilter
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libavfilter.so)
 add_library( swscale
-        SHARED
-        IMPORTED)
+             SHARED
+             IMPORTED )
 set_target_properties( swscale
-        PROPERTIES IMPORTED_LOCATION
-        ${distribution_DIR}/arm64-v8a/libswscale.so)
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libswscale.so)
+add_library( avdevice
+             SHARED
+             IMPORTED )
+set_target_properties( avdevice
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libavdevice.so)
+add_library( avformat
+             SHARED
+             IMPORTED )
+set_target_properties( avformat
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libavformat.so)
+add_library( postproc
+             SHARED
+             IMPORTED )
+set_target_properties( postproc
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/libpostproc.so)
+set(CMAKE_VERBOSE_MAKEFILE on)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+include_directories(src/main/cpp)
+include_directories(src/main/jni/include)
+
 target_link_libraries( # Specifies the target library.
         native-lib
-        swscale
-        swresample
-        avutil
-        avformat
-        avcodec
-        avfilter
+        avutil       #工具库(大部分需要)
+        swresample    #音频采样数据格式转换
+        avcodec      #编解码(重要)
+        avfilter      #滤镜特效处理
+        swscale       #视频像素数据格式转换
+        avdevice     #各种设备的输入输出
+        avformat     #封装格式处理
+        postproc     #后加工
+
 
         # Links the target library to the log library
         # included in the NDK.

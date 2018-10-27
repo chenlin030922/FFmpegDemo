@@ -14,7 +14,11 @@ android {
                 cppFlags "-std=c++11 -frtti -fexceptions"
             }
         }
+        ndk {
+            abiFilters 'armeabi'
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,7 +27,7 @@ android {
     }
     sourceSets{
         main{
-            jniLibs.srcDirs = ['libs']
+            jniLibs.srcDirs = ['src/main/jni']
         }
     }
     externalNativeBuild {

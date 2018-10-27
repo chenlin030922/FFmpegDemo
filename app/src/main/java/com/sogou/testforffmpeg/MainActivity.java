@@ -8,6 +8,14 @@ public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
     static {
+        System.loadLibrary("avutil");
+        System.loadLibrary("swresample");
+        System.loadLibrary("avcodec");
+        System.loadLibrary("avfilter");
+        System.loadLibrary("swscale");
+        System.loadLibrary("avdevice");
+        System.loadLibrary("avformat");
+        System.loadLibrary("postproc");
         System.loadLibrary("native-lib");
         //10.129.233.75
     }
