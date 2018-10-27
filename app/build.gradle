@@ -15,8 +15,7 @@ android {
             }
         }
         ndk {
-            abiFilters 'armeabi'
-        }
+            abiFilters 'armeabi'}
     }
 
     buildTypes {

@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("avformat");
         System.loadLibrary("postproc");
         System.loadLibrary("native-lib");
-        //10.129.233.75
     }
 
     @Override
